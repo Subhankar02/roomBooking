@@ -19,5 +19,5 @@ use App\Http\Controllers\SystemController;
 // });
 
 Route::get('/', [SystemController::Class, 'indexView']);
-// Route::get('/index', [SystemController::Class, 'bookRoom']);
+Route::get('/booked/rooms', [SystemController::Class, 'bookedRoomsView']);
 Route::post('/add/data', [SystemController::Class, 'bookRoom']);

@@ -13,8 +13,8 @@ class SystemController extends Controller
     public function indexView(){
         return view('index');
     }
-    // public function indexView(){
-    //     return view('index');
+    // public function bookedRoomsView(){
+    //     return view('bookedRooms');
     // }
     public function bookRoom(Request $request){
         // dd($request->all());
@@ -57,5 +57,13 @@ class SystemController extends Controller
             ];
             return response()->json($data);
         }
+    }
+
+    public function bookedRoomsView(){
+        $getData = DB::table('customers')
+                        ->join('booked_rooms', 'customers.uid', '=', 'booked_rooms.customer_id')
+                        ->select('customers.name','customers.phone','customers.email','booked_rooms.quantity_ac','booked_rooms.booking_date_ac','booked_rooms.total_amount_ac')
+                        ->get();
+        return view('bookedRooms', ['data' => $getData]);
     }
 }
